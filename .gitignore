@@ -26,5 +26,28 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+ExportedOBj/
+.consulo/
+*.csproj
+*.unityprof
+*.sin
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
 
+# Unity3D generated meta files
+*.pidb.meta
+*.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.unitypackage
 # End of https://www.toptal.com/developers/gitignore/api/windows
