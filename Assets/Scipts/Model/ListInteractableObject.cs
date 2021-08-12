@@ -6,9 +6,8 @@ namespace RollaBallGame
 {
     public sealed class ListInteractableObject : IEnumerator, IEnumerable
     {
-        private InteractiveObject[] _interactiveObjects;
+        private readonly InteractiveObject[] _interactiveObjects;
         private int _index = -1;
-        private InteractiveObject _current;
 
         public ListInteractableObject()
         {

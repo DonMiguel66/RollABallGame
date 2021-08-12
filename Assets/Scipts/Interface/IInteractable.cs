@@ -4,6 +4,6 @@ namespace RollaBallGame
 {
     public interface IInteractable: IAction
     {
-        bool isInteractable { get; }
+        bool _isInteractable { get; }
     }
 }

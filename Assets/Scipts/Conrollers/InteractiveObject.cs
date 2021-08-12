@@ -7,8 +7,7 @@ namespace RollaBallGame
 {
     public abstract class InteractiveObject : MonoBehaviour, IInteractable, IExecute
     {
-        public bool isInteractable { get; } = true;
-        public bool _isInteractable ;
+        public bool _isInteractable { get; set; } = true;
         protected abstract void Interaction();
         public abstract void Execute();
         protected bool IsInteractable
@@ -25,12 +24,11 @@ namespace RollaBallGame
 
         private void OnTriggerEnter(Collider other)
         {
-            if(!isInteractable || !other.GetComponent<PlayerBall>())
+            if(!_isInteractable || !other.GetComponent<PlayerBall>())
             {
                 return;
             }
             Interaction();
-            //OnTriggerChange();
             IsInteractable = false;
             Destroy(gameObject);
         }

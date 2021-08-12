@@ -8,14 +8,12 @@ namespace RollaBallGame
     public sealed class SpeedDebuff : InteractiveObject, IRotation
     {
         private float _rotSpeed;
-        private PlayerBall _player;
         public float _speedValue;
 
         public event Action<float> PlayerSpeedChange = delegate (float i) { };
         private void Awake()
         {
             _rotSpeed = Random.Range(25f, 50f);
-            _player = Object.FindObjectOfType<PlayerBall>();
         }
 
         public void Rotation()

@@ -8,7 +8,6 @@ namespace RollaBallGame
     public sealed class SpeedBuff : InteractiveObject, IFlicker
     {
         private Material _mat;
-        private PlayerBall _player;
         public float _speedValue;
 
         public event Action<float> PlayerSpeedChange = delegate(float i) { };
@@ -16,7 +15,6 @@ namespace RollaBallGame
         private void Awake()
         {
             _mat = GetComponent<Renderer>().material;
-            _player = Object.FindObjectOfType<PlayerBall>();
         }
         public void Flicker()
         {

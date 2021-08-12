@@ -8,7 +8,6 @@ namespace RollaBallGame
     {
         private IExecute[] _interactiveObjects;
         private int _index = -1;
-        private InteractiveObject _current;
         public int Length => _interactiveObjects.Length;
 
         public ListExecuteObject()

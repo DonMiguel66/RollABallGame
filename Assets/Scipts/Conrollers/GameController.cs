@@ -9,15 +9,15 @@ namespace RollaBallGame
 {
     public class GameController : MonoBehaviour, IDisposable
     {
-        private ListInteractableObject _interactiveObjects;
-        private ListExecuteObject _interactiveObject;
+        [SerializeField] private InputData _inputData;
+        private ListExecuteObject _interactiveObjects;
         private DisplayEndGame _displayEndGame;
         private DisplayWinGame _displayWinGame;
         private DisplayPoints _displayPoints;
 
         private CameraController _cameraController;
         private InputController _inputController; 
-        private Reference reference;
+        private Reference _reference;
 
         public bool _playerImmortalStatus = false;
         public int _playerPoints;
@@ -25,21 +25,21 @@ namespace RollaBallGame
 
         private void Awake()
         {
-            _interactiveObject = new ListExecuteObject();
-            reference = new Reference();
+            _interactiveObjects = new ListExecuteObject();
+            _reference = new Reference();
 
-            _cameraController = new CameraController(reference.PlayerBall.transform, reference.MainCamera.transform);
-            _interactiveObject.AddExecuteObject(_cameraController);
+            _cameraController = new CameraController(_reference.PlayerBall.transform, _reference.MainCamera.transform);
+            _interactiveObjects.AddExecuteObject(_cameraController);
 
-            _inputController = new InputController(reference.PlayerBall);
-            _interactiveObject.AddExecuteObject(_inputController);
+            _inputController = new InputController(_reference.PlayerBall, _inputData, _interactiveObjects);
+            _interactiveObjects.AddExecuteObject(_inputController);
 
 
-            _displayEndGame = new DisplayEndGame(reference.EndGame);
-            _displayPoints = new DisplayPoints(reference.Points);
-            _displayWinGame = new DisplayWinGame(reference.EndGame);
+            _displayEndGame = new DisplayEndGame(_reference.EndGame);
+            _displayPoints = new DisplayPoints(_reference.Points);
+            _displayWinGame = new DisplayWinGame(_reference.EndGame);
 
-            foreach (var obj in _interactiveObject)
+            foreach (var obj in _interactiveObjects)
             {
                 if(obj is Artifact artifact)
                 {
@@ -61,13 +61,13 @@ namespace RollaBallGame
                 }
             }
 
-            reference.RestartButton.onClick.AddListener(RestartGame);
-            reference.RestartButton.gameObject.SetActive(false);
+            _reference.RestartButton.onClick.AddListener(RestartGame);
+            _reference.RestartButton.gameObject.SetActive(false);
         }
 
         private void PlayerDeath(string value)
         {
-            reference.RestartButton.gameObject.SetActive(true);
+            _reference.RestartButton.gameObject.SetActive(true);
             Time.timeScale = 0.0f;
         }
 
@@ -85,7 +85,7 @@ namespace RollaBallGame
 
         private void StopGame()
         {
-            reference.RestartButton.gameObject.SetActive(true);
+            _reference.RestartButton.gameObject.SetActive(true);
             Time.timeScale = 0.0f;
         }
         private void RestartGame()
@@ -102,9 +102,9 @@ namespace RollaBallGame
 
         private void Update()
         {
-            for (var i = 0; i < _interactiveObject.Length; i++)
+            for (var i = 0; i < _interactiveObjects.Length; i++)
             {
-                var interactiveObject = _interactiveObject[i];
+                var interactiveObject = _interactiveObjects[i];
 
                 if (interactiveObject == null)
                 {
@@ -115,7 +115,7 @@ namespace RollaBallGame
         }
         public void Dispose()
         {
-            foreach (var obj in _interactiveObject)
+            foreach (var obj in _interactiveObjects)
             {
                 if (obj is Artifact artifact)
                 {
