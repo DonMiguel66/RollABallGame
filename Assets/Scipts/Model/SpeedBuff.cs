@@ -8,6 +8,7 @@ namespace RollaBallGame
     public sealed class SpeedBuff : InteractiveObject, IFlicker
     {
         private Material _mat;
+        [Range(1f, 10f)]
         public float _speedValue;
 
         public event Action<float> PlayerSpeedChange = delegate(float i) { };

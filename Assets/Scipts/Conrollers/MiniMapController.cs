@@ -10,7 +10,7 @@ namespace RollaBallGame
             _player = Camera.main.transform;
             transform.parent = null;
             transform.rotation = Quaternion.Euler(90.0f, 0, 0);
-            transform.position = _player.position + new Vector3(0, 5.0f, 5f);
+            transform.position = _player.position + new Vector3(0, 5.0f, 0);
 
             var rt = Resources.Load<RenderTexture>("MiniMap/MiniMapTexture");
 
@@ -21,7 +21,7 @@ namespace RollaBallGame
         {
             var newPosition = _player.position;
             newPosition.y = transform.position.y;
-            transform.position = newPosition;
+            transform.position = Vector3.Lerp(transform.position, newPosition, 0.125f);
             transform.rotation = Quaternion.Euler(90, _player.eulerAngles.y, 0);
         }
     }

@@ -7,7 +7,9 @@ namespace RollaBallGame
 {
     public sealed class SpeedDebuff : InteractiveObject, IRotation
     {
+        [Range(1f,5f)]
         private float _rotSpeed;
+        [Range(1f,10f)]
         public float _speedValue;
 
         public event Action<float> PlayerSpeedChange = delegate (float i) { };

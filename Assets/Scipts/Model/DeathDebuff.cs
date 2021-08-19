@@ -7,6 +7,7 @@ namespace RollaBallGame
 {
     public sealed class DeathDebuff : InteractiveObject, IRotation
     {
+        [Range(1f, 5f)]
         private float _rotSpeed;
         private GameController _GC;
         public event Action<string> KillPlayer = delegate (string i) { };
